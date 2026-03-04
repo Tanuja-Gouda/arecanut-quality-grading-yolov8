@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard - Arecanut Grading</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body { margin:0; font-family:'Inter',sans-serif; background:#f0f2f5; }
+    .navbar {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      background:#25a517;
+      padding:15px 40px;
+      color:white;
+    }
+    .navbar a { color:white; margin:0 10px; text-decoration:none; font-weight:600; }
+    .navbar a:hover { text-decoration:underline; }
+
+    .dashboard-container {
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      height:90vh;
+      gap:30px;
+    }
+
+    .upload-box {
+      background:white;
+      padding:40px;
+      border-radius:12px;
+      box-shadow:0 8px 24px rgba(0,0,0,0.1);
+      text-align:center;
+    }
+
+    input[type="file"] {
+      padding:10px;
+      margin-bottom:20px;
+    }
+
+    button {
+      padding:10px 20px;
+      background:#25a517;
+      color:white;
+      border:none;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:600;
+    }
+
+    button:hover { background:#1e8e13; }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div>🌰 Arecanut Grading</div>
+    <div>
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('dashboard') }} ">Dashboard</a>
+      <a href="{{ url_for('history') }}">History</a>
+      <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+  </div>
+
+  <!-- Dashboard Content -->
+  <div class="dashboard-container">
+    <div class="upload-box">
+      <h2>Upload Arecanut Image</h2>
+      <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" required><br>
+
+        <button type="submit">Upload & Predict</button>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+# Flask + templating
+flask==2.3.3
+
+# YOLOv8 and dependencies
+ultralytics==8.3.198
+torch==2.0.1
+torchvision==0.15.2
+
+# Image processing
+pillow==10.0.0
+opencv-python==4.8.1.78
+
+# Utils
+numpy==1.25.0
+matplotlib==3.7.2
+
+# Database (SQLite is built-in, so no extra library needed)

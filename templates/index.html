@@ -1,0 +1,107 @@
+{% include "navbar.html" %}
+
+<style>
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: #f0f2f5;
+    overflow-x: hidden;
+  }
+
+  .hero {
+    height: 100vh;
+    background: url('/static/new_image1.png') no-repeat center center/cover;
+  }
+
+  .about {
+    min-height: 100vh;
+    background: white;
+    padding: 80px 10%;
+    text-align: justify;
+    font-size: 1.2em;
+    line-height: 1.8;
+    color: #2c3e50;
+  }
+
+  .about h2 {
+    text-align: center;
+    color: #25a517;
+    margin-bottom: 40px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s ease;
+  }
+
+  .about h2.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .about-text {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1s ease;
+  }
+
+  .about-text.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<!-- Hero / Banner Section -->
+<div class="hero"></div>
+
+<!-- About Arecanut Section -->
+<div class="about" id="about">
+  <h2>About </h2>
+  <div class="about-text">
+    <p>
+      Arecanut grading is crucial for ensuring quality control and market fairness, 
+      but traditional manual methods are often subjective, time-consuming, and inconsistent. 
+      To address this, our project introduces an <b>AI-powered automated grading system</b> 
+      built on a fine-tuned <b>YOLOv8 model</b> that detects and classifies arecanuts into 
+      <b>Grade A</b> or <b>Grade B</b> directly from tray images.
+    </p>
+    <p>
+      The system improves accuracy and scalability by using high-resolution, curated, and 
+      augmented datasets. Hyperparameters such as batch size, learning rate, and weight decay 
+      were optimized through grid search, while augmentation improved robustness. YOLOv8 was 
+      chosen for its real-time speed and accuracy, reducing manual errors and supporting 
+      <b>market standardization</b>.
+    </p>
+    <p><b>Project Objectives:</b></p>
+    <ul>
+      <li>Collect and preprocess diverse arecanut images to create a well-labeled dataset.</li>
+      <li>Develop and optimize a deep learning model to classify nuts by <b>texture, size, and color</b>.</li>
+      <li>Implement advanced image processing to enhance feature extraction and evaluation.</li>
+      <li>Create a user-friendly interface  for farmers.</li>
+    </ul>
+    <p>
+      Looking ahead, we aim to expand the dataset, and scale the system for industrial applications, thus paving the way for smarter, AI-driven agriculture.
+    </p>
+  </div>
+</div>
+
+<script>
+  // Auto-scroll slightly into the About section when page loads
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      window.scrollTo({
+        top: window.innerHeight - 100, // scroll just below hero
+        behavior: "smooth"
+      });
+    }, 1500);
+  });
+
+  // Scroll animation for heading + text
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+      }
+    });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll(".about h2, .about-text").forEach(el => observer.observe(el));
+</script>

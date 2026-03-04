@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Result - Arecanut Grading</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { 
+      font-family: 'Inter', sans-serif; 
+      margin: 0; 
+      padding: 0; 
+      background: #f0f2f5; 
+    }
+
+    .navbar { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      background: #25a517; 
+      padding: 15px 40px; 
+      color: white; 
+    }
+
+    .navbar a { color: white; text-decoration: none; margin-left: 20px; }
+    .navbar a:hover { text-decoration: underline; }
+
+    .container-flex { 
+      display: flex; 
+      justify-content: space-between; /* equal space between items */ 
+      gap: 20px; 
+      flex-wrap: wrap; 
+      padding: 40px; 
+      margin: 0 auto; 
+      max-width: 1200px; /* center content on large screens */
+      box-sizing: border-box;
+    }
+
+    .container-box { 
+      background: white; 
+      padding: 30px; 
+      border-radius: 12px; 
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1); 
+      flex: 1 1 30%; /* grow/shrink, minimum width 30% */
+      min-width: 250px; 
+      text-align: center; 
+      margin: 10px; /* uniform margin around each box */
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container-box img { 
+      max-width: 100%; 
+      border-radius: 10px; 
+      margin-top: 15px;
+    }
+
+    .back-btn { 
+      position: fixed; 
+      bottom: 30px; 
+      right: 30px; 
+      background: #25a517; 
+      color: white; 
+      font-size: 24px; 
+      padding: 15px 20px; 
+      border-radius: 50%; 
+      text-decoration: none; 
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .back-btn:hover { background: #1e8e14; }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <div>🌰 Arecanut Grading</div>
+    <div>
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('dashboard') }}">Dashboard</a>
+      <a href="#">Result</a>
+      <a href="{{ url_for('history') }}">History</a>
+      <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+  </div>
+
+  <div class="container-flex">
+    <div class="container-box">
+      <h3>Grades Summary</h3>
+      <p><b>Total Grade A:</b> {{ grade_a }}</p>
+      <p><b>Total Grade B:</b> {{ grade_b }}</p>
+      <p><b>Total Scans:</b> {{ total_count }}</p>
+      <p><b>Majority Grade:</b> {{ final_grade }}</p>
+    </div>
+
+    <div class="container-box">
+      <h3>Graded Image</h3>
+      <img src="{{ image }}" alt="Predicted Image">
+    </div>
+
+  <div class="container-box">
+  <h3>Grade Distribution</h3>
+  <canvas id="gradeChart" style="width:100%; height:300px;"></canvas>
+</div>
+
+  </div>
+
+  <a href="{{ url_for('dashboard') }}" class="back-btn">＋</a>
+
+  <script>
+    const ctx = document.getElementById('gradeChart').getContext('2d');
+    const chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Grade A','Grade B'],
+        datasets: [{
+          label: 'Count',
+          data: [{{ grade_a }}, {{ grade_b }}],
+          backgroundColor: ['#4CAF50','#FF9800']
+        }]
+      },
+      options: { 
+        responsive: true, 
+        plugins: { legend: { display: false } }, 
+        scales: { y: { beginAtZero: true, precision:0 } } 
+      }
+    });
+  </script>
+</body>
+</html>

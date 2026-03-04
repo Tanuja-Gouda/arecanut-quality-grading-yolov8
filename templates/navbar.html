@@ -1,0 +1,49 @@
+<style>
+  .navbar {
+    position: fixed; /* 🔒 stays at the top */
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between; /* logo on left, links on right */
+    align-items: center;
+    background: #25a517;
+    padding: 15px 25px; /* reduced padding so logout fits */
+    color: white;
+    flex-wrap: nowrap; /* prevent items from breaking line */
+    box-sizing: border-box;
+    z-index: 1000; /* ensures it stays above all content */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* subtle shadow for depth */
+  }
+
+  .navbar div {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* even spacing instead of margin-left */
+  }
+
+  .navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 6px 10px; /* balanced clickable area */
+    position: relative;
+  }
+
+  .navbar a.active {
+    border-bottom: 2px solid white;
+  }
+
+  .navbar a:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<div class="navbar">
+  <div>🌰 Arecanut Grading</div>
+  <div>
+    <a href="{{ url_for('index') }}" class="{% if request.endpoint == 'index' %}active{% endif %}">Home</a>
+    <a href="{{ url_for('dashboard') }}" class="{% if request.endpoint == 'dashboard' %}active{% endif %}">Dashboard</a>
+    <a href="{{ url_for('history') }}" class="{% if request.endpoint == 'history' %}active{% endif %}">History</a>
+    <a href="{{ url_for('logout') }}" class="{% if request.endpoint == 'logout' %}active{% endif %}">Logout</a>
+  </div>
+</div>

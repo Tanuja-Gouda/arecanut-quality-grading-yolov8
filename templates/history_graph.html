@@ -1,0 +1,46 @@
+{% include "navbar.html" %}
+
+<style>
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #f0f2f5;
+    margin: 0;
+    text-align: center;
+    padding-top: 100px; /* ensures content is below fixed navbar */
+  }
+
+  h2 {
+    color: #333;
+    margin-top: 0;
+  }
+
+  img {
+    margin-top: 20px;
+    width: 60%;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
+
+  .btn-back {
+    background: #25a517;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+
+  .btn-back:hover {
+    background: #1e8e12;
+  }
+</style>
+
+<h2>History Graph</h2>
+<p>This graph shows how many Grade A and Grade B scans you’ve made.</p>
+
+<img src="{{ url_for('static', filename='uploads/history_plot.png') }}" alt="History Graph">
+
+<button class="btn-back" onclick="window.location.href='{{ url_for('history') }}'">
+  Back to History
+</button>
